@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/sass/style.scss">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Montserrat:wght@100;300&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="fonts/css/all.css"/> 
+    <title>Document</title>
+</head>
+<body>
+    <main>
+     
+        <header>
+            <div  class="wrapper">
+                <h1>Brain test that makes you smile</h1>
+                <h2>Answer Questions correctly and receive a gift</h2>
+                <a  href="#firstQ"  class="testButton" id="takeQuiz">Take The Test</a>
+            </div>
+        </header>
+        
+        <fieldset class="question1" id="firstQ">
+            <div class="wrapper">
+                <h2>How many letters are left if E and T leave the alphabet?</h2>
+                
+                <input type="radio" name="answers" class="answer" value="10" id="ten">
+                <label for="ten">10</label>
+                
+                <input type="radio" name="answers" class="answer" value="26" id="twentysix">
+                <label for="twentysix">26</label>
+            
+                <input type="radio" name="answers" class="answer" value="6" id="six">
+            <label for="six">6</label>
+                
+            <input type="radio" name="answers" class="answer" value="24" id="twntyfour">
+                <label for="twntyfour">  24</label>
+                    
+                <button type="submit" class="firstButton" >Next</button>
+                <input type="hidden" class="visuallyHidden" name="answers" value="">
+            </div>
+        </fieldset>
+
+        <fieldset class="question2">
+            <div class="wrapper">
+                <h2>What occurs twice in a week, once in a year and never in a month? </h2>
+        
+                <input type="text" name="preferredAnswer" id="preferredAnswer" placeholder="Type your answer">
+                <button type="submit" class="secondButton" >Next</button>
+                <input type="hidden" class="visually" name="answers" value="">
+            
+            </div>
+        </fieldset>
+        <section class="results wrapper">
+            <p>Choose your <i class="fas fa-gift"></i></p>
+            <select class="selection">
+                <option value="hug">first</option>
+                <option value="clapping">second</option>
+            </select>
+            <div class="gif">
+                <img class=" hidden1" src="https://media.giphy.com/media/Hc8PMCBjo9BXa/giphy.gif" alt=""/>
+                <img class=" hidden2" src="https://media.giphy.com/media/gdZdXMTxxsV8D6fumt/giphy.gif" alt=""/>
+            </div>
+		</section>
+       
+        
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+   <script>
+
+    $(function(){
+        $(`#takeQuiz`).click(function(){
+        $(`.question1`).show();
+        });
+
+        $(".answer").click(function(){
+            const x = $(this).attr('value');
+            $(".visuallyHidden").attr('value',x);
+        })
+
+        $(".firstButton").click(function(e){
+            e.preventDefault();
+            const t = $(".visuallyHidden").attr('value');
+            if (t == 6)
+            {
+            $(`.question1`).append(`<div class="wrapper"><h3>Correct,Answer next question</h3></div>`);
+            $(`.question2`).show();
+            }
+            else {
+            alert("Incorrect :(")
+            }
+        })
+
+        $(`input[type="text"]`).click(function(e){
+            const y = $(this).val(); 
+            $(".visually").attr('value',y);
+        })
+
+        $('.secondButton').click(function() {  
+            const z = $(".visually").attr(`value`);
+            if (z == `e`)
+            {
+                $(`.question2`).append(`<div class="wrapper"><h3>Correct</h3></div>`);
+                $(`.results`).show();
+            }
+            else {
+                alert("Incorrect :(")
+            }
+        });  
+
+        $(`select`).on(`change`,function(event){
+            const selection = event.target.value;
+            if (selection == `clapping`)
+            {
+            $(`.hidden1`).show();
+            $(`.hidden2`).hide();
+            }
+            else{
+            $(`.hidden2`).show();
+            $(`.hidden1`).hide();
+            }
+        });
+    });
+   </script>
+
+</body>
+</html>
